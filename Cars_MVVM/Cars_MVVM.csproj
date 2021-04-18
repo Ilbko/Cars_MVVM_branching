@@ -79,6 +79,7 @@
     <Compile Include="Model\CarModel.cs" />
     <Compile Include="Model\Base\Coffee.cs" />
     <Compile Include="Model\CoffeeModel.cs" />
+    <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\CarViewModel.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

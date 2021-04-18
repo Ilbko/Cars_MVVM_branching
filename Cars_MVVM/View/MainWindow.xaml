@@ -13,8 +13,16 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
 
-        <ListBox Grid.Column="0" ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}">
+        <Button Grid.Column="0" Command="{Binding FindCommand}">Найти</Button>
+        <TextBox Grid.Column="1" Width="Auto" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+        <!--<ListBox Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}">-->
+        <ListBox Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="0">
@@ -25,7 +33,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <StackPanel Grid.Column="1" DataContext="{Binding SelectedCar}">
+        <StackPanel Grid.Column="1" Grid.Row="1" DataContext="{Binding SelectedCar}">
             <TextBlock Text="Характеристики" FontSize="20"></TextBlock>
             <TextBlock Text="Объём двигателя"></TextBlock>
             <TextBlock Text="{Binding Engine_volume, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
@@ -37,7 +45,7 @@
             <TextBlock Text="{Binding Prise, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
         </StackPanel>
 
-        <ListBox Grid.Column="2" ItemsSource="{Binding Coffees}" SelectedItem="{Binding SelectedCoffee}">
+        <ListBox Grid.Column="2" Grid.Row="1" ItemsSource="{Binding Coffees}" SelectedItem="{Binding SelectedCoffee}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -47,7 +55,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <StackPanel Grid.Column="3" DataContext="{Binding SelectedCoffee}">
+        <StackPanel Grid.Column="3" Grid.Row="1" DataContext="{Binding SelectedCoffee}">
             <TextBlock Text="Характеристики" FontSize="20"></TextBlock>
             <TextBlock Text="Объём двигателя"></TextBlock>
             <TextBlock Text="{Binding Info, UpdateSourceTrigger=PropertyChanged}"></TextBlock>

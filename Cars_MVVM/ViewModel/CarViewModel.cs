@@ -6,7 +6,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Cars_MVVM.Model;
+using Cars_MVVM.View.ViewModel;
 
 namespace Cars_MVVM.ViewModel
 {
@@ -14,6 +16,35 @@ namespace Cars_MVVM.ViewModel
     {
         public ObservableCollection<Cars> Cars { get; set; }
         public ObservableCollection<Coffee> Coffees { get; set; }
+
+        private string searchText = string.Empty;
+        public string SearchText
+        {
+            get { return searchText; }
+            set { searchText = value; OnPropertyChanged(SearchText); }
+        }
+
+        private RelayCommand findCommand;
+        public RelayCommand FindCommand
+        {
+            get
+            {
+                return findCommand ?? (findCommand = new RelayCommand(act =>
+                {
+                    if (SearchText == string.Empty)
+                        //this.foundCars = this.Cars;
+                        this.Cars = new ObservableCollection<Cars>(Find(i => i.Company.Length > 0));
+                    else
+                    {
+                        this.Cars = new ObservableCollection<Cars>(Find(i => i.Company.ToLower().Contains(searchText.ToLower())));
+                        OnPropertyChanged("Cars");
+                    }
+                }
+                ));
+            }
+        }
+
+        IEnumerable<Cars> Find(Func<Cars, bool> filter) => Cars.Where(filter).ToList();
 
         public CarViewModel()
         {
